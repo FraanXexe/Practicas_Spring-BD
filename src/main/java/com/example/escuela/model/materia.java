@@ -20,20 +20,7 @@ public class materia {
     @Column // Define una columna opcional
     private String descripcion;
 
-    //____________________________________________________________________________
-/*
-    @ManyToMany(mappedBy = "materias")
-    @JsonIgnore  // Ignora esta relación al serializar a JSON
-    private List<maestro> maestros;
 
-    public List<maestro> getMaestros() {
-        return maestros;
-    }
-
-    public void setMaestros(List<maestro> maestros) {
-        this.maestros = maestros;
-    }
-*/
 //____________________________________________________________________________
 
     //getters
