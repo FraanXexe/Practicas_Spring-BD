@@ -19,7 +19,7 @@ public class maestroService {
         this.maestroRepository = maestroRepository;
     }
 
-    // Metodo para insertar maestros
+    // Metodo para insertar maestross
     public maestro guardarMaestro(maestro maestro) {
         return maestroRepository.save(maestro); // Guarda el maestro en la base de datos
     }
