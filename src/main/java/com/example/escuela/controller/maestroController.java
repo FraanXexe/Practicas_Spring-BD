@@ -1,11 +1,17 @@
 package com.example.escuela.controller;
 
 import com.example.escuela.model.maestro;
+import com.example.escuela.model.materia;
 import com.example.escuela.service.maestroService;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.ParameterizedTypeReference;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.client.RestTemplate;
 
+import java.util.Collections;
 import java.util.List;
 
 @RestController
@@ -27,4 +33,16 @@ public class maestroController {
         return maestroService.obtenerTodosLosMaestros(); // Llama al servicio para obtener los maestros
     }
 
+    // Endpoint para consumir en Servicio externo
+    @GetMapping("/materiasBymaestro/{id}")
+    public ResponseEntity<List<materia>> getMateriasPorMaestroId(@PathVariable Long id) {
+
+            List<materia> materias = maestroService.obtenerMateriasPorMaestroId(id);
+            if (materias == null || materias.isEmpty()) {
+                return ResponseEntity.noContent().build();
+            }
+            return ResponseEntity.ok(materias);
+    }
 }
+
+

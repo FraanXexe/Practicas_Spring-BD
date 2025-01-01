@@ -36,6 +36,9 @@ public class maestro {
 
     @Column(name = "correo_electronico", unique = true, length = 100) // Define una columna única con longitud máxima de 100
     private String correoElectronico;
+
+
+
 //____________________________________________________________________________
 
 // Getters and Setters
@@ -94,4 +97,5 @@ public class maestro {
     public void setCorreoElectronico(String correoElectronico) {
         this.correoElectronico = correoElectronico;
     }
+
 }

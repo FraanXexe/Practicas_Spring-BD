@@ -1,10 +1,6 @@
 package com.example.escuela.model;
 
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
-
-import java.util.List;
 
 @Entity // Indica que esta clase es una entidad JPA
 @Table(name = "materia") // Asocia esta clase con la tabla 'materia' en la base de datos
