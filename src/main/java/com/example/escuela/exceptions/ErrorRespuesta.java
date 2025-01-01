@@ -1,17 +1,17 @@
 package com.example.escuela.exceptions;
 
 public class ErrorRespuesta {
-    private String error;
+    private String mensaje;
 
-    public ErrorRespuesta(String error) {
-        this.error = error;
+    public ErrorRespuesta(String mensaje) {
+        this.mensaje = mensaje;
     }
 
-    public String getError() {
-        return error;
+    public String getMensaje() {
+        return mensaje;
     }
 
-    public void setError(String error) {
-        this.error = error;
+    public void setMensaje(String mensaje) {
+        this.mensaje = mensaje;
     }
 }

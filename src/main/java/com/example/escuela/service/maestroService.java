@@ -44,7 +44,6 @@ public class maestroService {
     // Metodo para obtener materias por maestro
     public List<materia> obtenerMateriasPorMaestroId(Long id) {
         String url = SERVICIO_BASE_URL + id;
-        try {
             ResponseEntity<List<materia>> response = restTemplate.exchange(
                     url,
                     HttpMethod.GET,
@@ -53,11 +52,7 @@ public class maestroService {
                     }
             );
             System.out.println("Materias: " + response.getBody());
-            // Retorna el cuerpo de la respuesta o una lista vacía si no hay cuerpo
             return response.getBody();
-        } catch (RestClientException e) {
-            System.err.println("Error de conexión con el Servicio Externo: " + e.getMessage());
-            throw new RuntimeException("Posiblemente el servicio externo esta apagado");
-        }
+
     }
 }
