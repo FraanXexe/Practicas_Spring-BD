@@ -2,6 +2,7 @@ package com.example.escuela.service;
 
 
 import com.example.escuela.model.materia;
+import com.example.escuela.model.request.MateriaRequest;
 import com.example.escuela.repository.materiaRepository;
 import org.springframework.stereotype.Service;
 
@@ -18,8 +19,11 @@ public class materiaService {
     }
 
     // Metodo para insertar materias
-    public materia guardarMateria(materia materia) {
-        return materiaRepository.save(materia); // Guarda la materia en la base de datos
+    public materia guardarMateria(MateriaRequest materiaRequest) {
+        materia materiaEntity=new materia();
+        materiaEntity.setNombre(materiaRequest.getNombre());
+        materiaEntity.setDescripcion(materiaRequest.getDescripcion());
+        return materiaRepository.save(materiaEntity); // Guarda la materia en la base de datos
     }
 
     // Metodo para seleccionar materias

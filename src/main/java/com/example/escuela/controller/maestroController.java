@@ -37,15 +37,7 @@ public class maestroController {
     // Endpoint para consumir en Servicio externo
     @GetMapping("/materiasBymaestro/{id}")
     public ResponseEntity<?> getMateriasPorMaestroId(@PathVariable Long id) {
-
-            List<materia> materias = maestroService.obtenerMateriasPorMaestroId(id);
-        if (String.valueOf(id).length() > 5) {
-            String mensaje = "Error: El ID proporcionado excede el límite de 5 caracteres";
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(Collections.singletonMap("mensaje", mensaje));
-        } else if (materias == null || materias.isEmpty()) {
-            String mensaje = "No se encontró un maestro con el ID " + id + " proporcinado";
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(Collections.singletonMap("mensaje", mensaje));
-        }
+        List<materia> materias = maestroService.obtenerMateriasPorMaestroId(id);
             return ResponseEntity.ok(materias);
     }
 }

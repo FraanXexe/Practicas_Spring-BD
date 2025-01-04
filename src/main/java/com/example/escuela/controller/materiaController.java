@@ -2,7 +2,9 @@ package com.example.escuela.controller;
 
 
 import com.example.escuela.model.materia;
+import com.example.escuela.model.request.MateriaRequest;
 import com.example.escuela.service.materiaService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -17,7 +19,7 @@ public class materiaController {
 
     // Endpoint para insertar una nueva materia
     @PostMapping // Maneja solicitudes POST
-    public materia agregarMateria(@RequestBody materia materia) {
+    public materia agregarMateria(@RequestBody @Valid MateriaRequest materia) {
         return materiaService.guardarMateria(materia); // Llama al servicio para guardar la materia
     }
 

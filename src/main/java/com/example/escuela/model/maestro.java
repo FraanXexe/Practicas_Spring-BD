@@ -1,8 +1,9 @@
 package com.example.escuela.model;
 
-
 import jakarta.persistence.*;
+
 import java.util.Date;
+
 import lombok.*;
 
 @Entity //Indica que esta clase es una entidad JPA
@@ -42,6 +43,7 @@ public class maestro {
 //____________________________________________________________________________
 
 // Getters and Setters
+
     public Long getIdMaestro() {
         return idMaestro;
     }

@@ -19,26 +19,26 @@ public class materia {
 
 //____________________________________________________________________________
 
-    //getters
+    // Getters y Setters
+
     public Long getId_materia() {
         return id_materia;
+    }
+
+    public void setId_materia(Long id_materia) {
+        this.id_materia = id_materia;
     }
 
     public String getNombre() {
         return nombre;
     }
 
-    public String getDescripcion() {
-        return descripcion;
-    }
-
-    //setters
-    public void setId_materia(Long id_materia) {
-        this.id_materia = id_materia;
-    }
-
     public void setNombre(String nombre) {
         this.nombre = nombre;
+    }
+
+    public String getDescripcion() {
+        return descripcion;
     }
 
     public void setDescripcion(String descripcion) {
