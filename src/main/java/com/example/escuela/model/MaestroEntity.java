@@ -9,7 +9,7 @@ import lombok.*;
 @Entity //Indica que esta clase es una entidad JPA
 @Data
 @Table(name = "maestro") //Asocia esta clase con la tabla 'maestro'
-public class Maestro {
+public class MaestroEntity {
 
     @Id // Define la clave primaria
     @GeneratedValue(strategy = GenerationType.IDENTITY) // Genera valores automáticamente

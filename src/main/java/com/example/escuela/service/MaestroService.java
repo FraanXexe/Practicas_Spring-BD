@@ -1,6 +1,6 @@
 package com.example.escuela.service;
-import com.example.escuela.model.Maestro;
-import com.example.escuela.model.Materia;
+import com.example.escuela.mappers.MaestroMapper;
+import com.example.escuela.model.MateriaEntity;
 import com.example.escuela.model.request.MaestroRequest;
 import com.example.escuela.model.response.MaestroResponse;
 import com.example.escuela.repository.MaestroRepository;
@@ -14,8 +14,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.client.ResourceAccessException;
 import org.springframework.web.client.RestTemplate;
 
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 @Service // Indica que esta clase es un servicio
@@ -30,44 +28,34 @@ public class MaestroService {
     private final String SERVICIO_BASE_URL = "http://localhost:8081/api/maestros/materias/";
 
     // Constructor para inyectar el repositorio
-    public MaestroService(MaestroRepository maestroRepository) {
+    public MaestroService(MaestroRepository maestroRepository, MaestroMapper maestroMapper) {
         this.maestroRepository = maestroRepository;
+        this.maestroMapper = maestroMapper;
     }
 
     // Metodo para insertar maestros
+    private final MaestroMapper maestroMapper;
     public MaestroResponse guardarMaestro(MaestroRequest maestroRequest) {
-        Maestro maestroEntity=new Maestro();
-        maestroEntity.setNombre(maestroRequest.getNombre());
-        maestroEntity.setApellidoPaterno(maestroRequest.getApellidoPaterno());
-        maestroEntity.setApellidoMaterno(maestroRequest.getApellidoMaterno());
-        maestroEntity.setEspecialidad(maestroRequest.getEspecialidad());
-        maestroEntity.setFechaContratacion(maestroRequest.getFechaContratacion());
-        maestroEntity.setCorreoElectronico(maestroRequest.getCorreoElectronico());
-        maestroRepository.save(maestroEntity); // Guarda el maestro en la base de datos
-        return new MaestroResponse( maestroEntity.getIdMaestro(),
-                                    maestroEntity.getNombre(),
-                                    maestroEntity.getApellidoPaterno(),
-                                    maestroEntity.getApellidoMaterno(),
-                                    maestroEntity.getEspecialidad(),
-                                    maestroEntity.getFechaContratacion(),
-                                    maestroEntity.getCorreoElectronico());
+        return  maestroMapper.toMaestroResponse(maestroRepository.save(
+                maestroMapper.toMaestroEntity(maestroRequest)));
     }
 
     // Metodo para seleccionar maestros
-    public List<Maestro> obtenerTodosLosMaestros() {
-        return this.maestroRepository.findAll(); // Obtiene todos los maestros
+    public List<MaestroResponse> obtenerTodosLosMaestros() {
+        return  maestroMapper.toMaaestroResponseList(maestroRepository.findAll());
     }
 
+
     // Metodo para obtener materias por maestro
-    public List<Materia> obtenerMateriasPorMaestroId(Long id) {
+    public List<MateriaEntity> obtenerMateriasPorMaestroId(Long id) {
         try {
             System.out.println("iniciandoCusumoDelServicioExterno");
             String url = SERVICIO_BASE_URL + id;
-            ResponseEntity<List<Materia>> response = restTemplate.exchange(
+            ResponseEntity<List<MateriaEntity>> response = restTemplate.exchange(
                     url,
                     HttpMethod.GET,
                     null,
-                    new ParameterizedTypeReference<List<Materia>>() {
+                    new ParameterizedTypeReference<List<MateriaEntity>>() {
                     }
             );
             if (response.getBody() == null || response.getBody().isEmpty()) {

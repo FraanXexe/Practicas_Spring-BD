@@ -9,7 +9,7 @@ import java.util.Date;
 @Data
 @Entity // Indica que esta clase es una entidad JPA
 @Table(name = "alumno") // Asocia esta clase con la tabla 'alumno' en la base de datos
-public class Alumno {
+public class AlumnoEntity {
 
     @Id // Define la clave primaria
     @GeneratedValue(strategy = GenerationType.IDENTITY) // Genera valores automáticamente

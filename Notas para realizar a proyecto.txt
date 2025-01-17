@@ -11,7 +11,7 @@
     PENDIENTE POR HACER
 	-detectar la URL vacia o incompleta LISTO (No lo pude hacer con el IF, cree otra excepcion con el NoResourceFoundException)
     -field (falta sacar el campo) LISTO, pero revisar si es correcto colocar "El campo (" en la ex y en el request "No puede ir vacio")
-    -agregar alumno y maestro como entity
+    -agregar alumnoEntity y maestroEntity como entity
 		*crear las clases dentro de Request LISTO
 		*modificar el controller (solo post) LISTO
 		*modificar el service LISTO
@@ -22,9 +22,9 @@
     -Variables constantes para los textos LISTO
 	()
 
-     (Dar de alta varios maestro y materias, con algun programa 200,000) pagina: https://www.mockaroo.com/
-     agregarle al maestro   200,000 datos
-     agregarle a la materia 200,000 datos
+     (Dar de alta varios maestroEntity y materiaEntities, con algun programa 200,000) pagina: https://www.mockaroo.com/
+     agregarle al maestroEntity   200,000 datos
+     agregarle a la materiaEntity 200,000 datos
      agregarle a la tabla relacional 200,000 datos
 	 
 	 se realizo con phyton
@@ -75,3 +75,26 @@ y no valida el campo si lo paso por ejemplo 12-12-2020
 porque ahora postman al guardar guada este dato con fecha y hora
     "fechaContratacion": "2021-01-03T00:00:00.000+00:00",
 segun yo antes solo era el dia, mes ,año
+
+
+
+cambiar de lista de alumnoEntities a una entity
+primero una lista List<AlumnoResponse>
+se crea la variable de la lista : List<Alumno> listaAlumno = alumnoRepository.findAll();
+Se recorre la lista con Stream para sacar los datos de la lista anterioir
+Se crea uN alumnoResponse para colocar su dato correspondiente :  AlumnoResponse response = new AlumnoResponse();
+traemos el dato response.setNombre(alumnoEntity.getNombre());
+
+
+
+Pasar todos a Mapper (asi como el de Alumno)
+
+
+como se hace el mapper de lista (intentarlo)
+quitar de la linea 47 a 55 (obtenerallalumnos)
+retornar la lista con el mapper
+
+
+
+LocaDate date = LocalDate.parse("yyyy-mm-dd");
+parseo en el service

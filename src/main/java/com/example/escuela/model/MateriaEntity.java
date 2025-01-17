@@ -7,7 +7,7 @@ import lombok.Data;
 @Data
 @Entity // Indica que esta clase es una entidad JPA
 @Table(name = "materia") // Asocia esta clase con la tabla 'materia' en la base de datos
-public class Materia {
+public class MateriaEntity {
 
     @Id // Define la clave primaria
     @GeneratedValue(strategy = GenerationType.IDENTITY) // Genera valores automáticamente

@@ -1,5 +1,6 @@
 package com.example.escuela.service;
-import com.example.escuela.model.Materia;
+
+import com.example.escuela.mappers.MateriaMapper;
 import com.example.escuela.model.request.MateriaRequest;
 import com.example.escuela.model.response.MateriaResponse;
 import com.example.escuela.repository.MateriaRepository;
@@ -14,23 +15,20 @@ public class MateriaService {
     private final MateriaRepository materiaRepository;
 
     // Constructor para inyectar el repositorio
-    public MateriaService(MateriaRepository materiaRepository) {
+    public MateriaService(MateriaRepository materiaRepository, MateriaMapper materiaMapper) {
         this.materiaRepository = materiaRepository;
+        this.materiaMapper = materiaMapper;
     }
 
     // Metodo para insertar materias
+    private final MateriaMapper materiaMapper;
     public MateriaResponse guardarMateria(MateriaRequest materiaRequest) {
-        Materia materiaEntity=new Materia();
-        materiaEntity.setNombre(materiaRequest.getNombre());
-        materiaEntity.setDescripcion(materiaRequest.getDescripcion());
-        materiaRepository.save(materiaEntity); // Guarda la materia en la base de datos
-        return new MateriaResponse( materiaEntity.getIdMateria(),
-                                    materiaEntity.getNombre(),
-                                    materiaEntity.getDescripcion());
+        return materiaMapper.toMateriaResponse(materiaRepository.save(
+                materiaMapper.toMateriaEntity(materiaRequest)));
     }
 
     // Metodo para seleccionar materias
-    public List<Materia> obtenerTodasLasMaterias() {
-        return materiaRepository.findAll(); // Obtiene todas las materias
+    public List<MateriaResponse> obtenerTodasLasMaterias() {
+        return materiaMapper.toMateriaResponseList(materiaRepository.findAll());
     }
 }

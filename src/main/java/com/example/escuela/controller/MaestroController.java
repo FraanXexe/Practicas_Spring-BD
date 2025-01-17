@@ -1,7 +1,6 @@
 package com.example.escuela.controller;
 
-import com.example.escuela.model.Maestro;
-import com.example.escuela.model.Materia;
+import com.example.escuela.model.MateriaEntity;
 import com.example.escuela.model.request.MaestroRequest;
 import com.example.escuela.model.response.MaestroResponse;
 import com.example.escuela.service.MaestroService;
@@ -15,6 +14,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("api/maestros") // Define la ruta de busqueda
+@CrossOrigin(origins = "*")
 public class MaestroController {
 
     @Autowired // Inyección
@@ -28,15 +28,15 @@ public class MaestroController {
 
     // Endpoint para consultar todos los maestros
     @GetMapping // Maneja solicitudes GET
-    public List<Maestro> listarMaestros() {
+    public List<MaestroResponse> listarMaestros() {
         return maestroService.obtenerTodosLosMaestros(); // Llama al servicio para obtener los maestros
     }
 
     // Endpoint para consumir en Servicio externo
     @GetMapping("/materiasBymaestro/{id}")
     public ResponseEntity<?> getMateriasPorMaestroId(@PathVariable Long id) {
-        List<Materia> materias = maestroService.obtenerMateriasPorMaestroId(id);
-            return ResponseEntity.ok(materias);
+        List<MateriaEntity> materiaEntities = maestroService.obtenerMateriasPorMaestroId(id);
+            return ResponseEntity.ok(materiaEntities);
     }
 }
 
