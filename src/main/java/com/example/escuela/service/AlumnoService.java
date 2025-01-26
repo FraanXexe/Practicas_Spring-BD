@@ -1,19 +1,23 @@
 package com.example.escuela.service;
+
+import com.example.escuela.constants.MensajesError;
+import com.example.escuela.exceptions.ExcPersonalizada;
 import com.example.escuela.mappers.AlumnoMapper;
 import com.example.escuela.model.AlumnoEntity;
 import com.example.escuela.model.request.AlumnoRequest;
 import com.example.escuela.model.response.AlumnoResponse;
 import com.example.escuela.repository.AlumnoRepository;
+import com.example.escuela.utils.Utilerias;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
-
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.PageRequest;
 
 
+import java.time.LocalDate;
 import java.util.List;
 
 @Service // Indica que esta clase es un servicio
@@ -28,13 +32,22 @@ public class AlumnoService {
         this.alumnoMapper = alumnoMapper;
     }
 
-    // Metodo para insertar alumnos
+    // Metodo para insertar alumno
     private final AlumnoMapper alumnoMapper;
     public AlumnoResponse guardarAlumno(AlumnoRequest alumnoRequest) {
-        return alumnoMapper.toAlumnoResponse(alumnoRepository.save(
-               alumnoMapper.toAlumnoEntity(alumnoRequest)));
+        LocalDate fechaNacimiento = Utilerias.parsearYValidarFecha(alumnoRequest.getFechaNacimiento());
+        // Mapear y guardar el alumno
+        AlumnoEntity alumnoEntity = alumnoMapper.toAlumnoEntity(alumnoRequest);
+        alumnoEntity.setFechaNacimiento(fechaNacimiento);
+        return alumnoMapper.toAlumnoResponse(alumnoRepository.save(alumnoEntity));
+      //return alumnoMapper.toAlumnoResponse(
+        // alumnoRepository.save(
+        // alumnoMapper.toAlumnoEntity(alumnoRequest)
+        // .setFechaNacimiento(fechaNacimiento))
     }
-/*
+
+
+    /*
     // Obtener alumnos
     public List<AlumnoResponse> obtenerAllAlumnos(){
         List<Alumno> listaAlumno = alumnoRepository.findAll();  // Sale de BD
@@ -54,31 +67,23 @@ public class AlumnoService {
                 .collect(Collectors.toList()); // Colectas los resultados en una lista
         return listaAlumnoResponse;
     }
-
  */
+
     // Obtener alumnos
     public List<AlumnoResponse> obtenerAllAlumnos() {
         return alumnoMapper.toAlumnoResponseList(alumnoRepository.findAll());
     }
 
-/*
-    // Metodo para seleccionar Alumnos por ID
-    public List<AlumnoEntity> obtenerAlumnoById(Long alumnoId) {
-        return alumnoRepository.findAlumnosById(alumnoId);
-    }
-
-    public List<AlumnoResponse> obtenerAlumnoById(Long alumnoId) {
-        List<AlumnoEntity> alumnoEntities = alumnoRepository.findAlumnosById(alumnoId);
-        return alumnoMapper.toAlumnoResponseList(alumnoEntities);
-    }
- */
+    // Obtener alumnos por ID
     public AlumnoResponse obtenerAlumnoById(Long alumnoId) {
         return alumnoRepository.findById(alumnoId)
                 .map(alumnoMapper::toAlumnoResponse)
-                .orElse(null);
+                .orElseThrow(() -> new ExcPersonalizada(
+                        MensajesError.ID_NOT_REGISTERED_MESSAGE_ALUMNO,
+                        HttpStatus.OK));
     }
 
-
+    // Obtener alumnos por pagina
     public Page<AlumnoEntity> obtenerAlumnosPaginados(int page, int size) {
         Pageable pageable = PageRequest.of(page, size);
         return alumnoRepository.findAll(pageable);

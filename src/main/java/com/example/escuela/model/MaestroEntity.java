@@ -2,6 +2,7 @@ package com.example.escuela.model;
 
 import jakarta.persistence.*;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 import lombok.*;
@@ -29,7 +30,7 @@ public class MaestroEntity {
     private String especialidad;
 
     @Column(nullable = false) // Define una columna obligatoria
-    private Date fechaContratacion;
+    private LocalDate fechaContratacion;
 
     @Column(length = 100) // Define una columna única con longitud máxima de 100
     private String correoElectronico;

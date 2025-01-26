@@ -19,8 +19,12 @@ import java.util.List;
         MateriaEntity toMateriaEntity(MateriaRequest materiaRequest);
 
         @Mappings({
+                @Mapping(target="idMateria", source="id_materia"),
                 @Mapping(target="nombreMateria", source="nombre"),
-                @Mapping(target="descripcionMateria", source="descripcion"),
+                @Mapping(target="descripcionMateria", source="descripcion")
+                // Sorce es el origen que en este caso viene del Entity
+                // El target viene de request
+                // Esto se realiza cuando los nombres no son iguales y no pueden ser mapeados en automatico
         })
         MateriaResponse toMateriaResponse(MateriaEntity materiaEntity);
 

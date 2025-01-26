@@ -29,10 +29,8 @@ public class MaestroRequest {
     private String especialidad;
 
     @NotNull(message = "No puede ir vacio")
-    @Past(message = "No puede ser mayor al dia de hoy")
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
-    //@Pattern(regexp = "^\\d{4}-\\d{2}-\\d{2}$", message = "Debe escribirse de la siguiente forma yyyy-MM-dd") // Para validar el formato
-    private Date fechaContratacion;
+    @Pattern(regexp = "^\\d{4}-\\d{2}-\\d{2}$", message = "Debe escribirse de la siguiente forma yyyy-MM-dd") // Para validar el formato
+    private String fechaContratacion;
 
     @NotNull(message = "No puede estar vacío")
     @Email(message = "Debe tener un formato válido, ejemplo: usuario123@dominio.com")

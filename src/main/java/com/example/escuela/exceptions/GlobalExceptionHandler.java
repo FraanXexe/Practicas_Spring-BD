@@ -80,33 +80,12 @@ public class GlobalExceptionHandler {
     public ResponseEntity<List<ErrorRespuesta>> CaracterIlegalSinComillas(HttpMessageNotReadableException e) {
         // Log en consola
         LogUtils.logError(e.getMessage(), e);
-        // Verificar si el error es causado por un formato de fecha inválido
-        if (e.getCause() != null) { //obtiene la causa original de una excepción, si existe, permitiendo rastrear el origen del error en excepciones anidadas
-            ErrorRespuesta errorRes = new ErrorRespuesta(MensajesError.INVALID_DATE_FORMAT_MESSAGE);
+
+            ErrorRespuesta errorRes = new ErrorRespuesta(MensajesError.INVALID_REQUEST_BODY_MESSAGE);
             List<ErrorRespuesta> errorList = Collections.singletonList(errorRes);
             return ResponseEntity
                     .status(HttpStatus.BAD_REQUEST)
                     .body(errorList);
-        }
-        // Si no es un error de fecha, manejar el caso genérico
-        ErrorRespuesta errorRes = new ErrorRespuesta(MensajesError.INVALID_REQUEST_BODY_MESSAGE);
-        List<ErrorRespuesta> errorList = Collections.singletonList(errorRes);
-
-        return ResponseEntity
-                .status(HttpStatus.BAD_REQUEST)
-                .body(errorList);
-    }
-
-    // Excepcion personalizada para ID no registrado
-    @ExceptionHandler(ExcPersonalizada.class)
-    public ResponseEntity<ErrorRespuesta> handleEntityNotFoundException(ExcPersonalizada ex) {
-        // Crear un objeto de respuesta con el mensaje de la excepción
-        ErrorRespuesta errorRes = new ErrorRespuesta(MensajesError.ID_NOT_REGISTERED_MESSAGE);
-
-        // Devolver la respuesta con el código de estado 404 (Not Found)
-        return ResponseEntity
-                .status(HttpStatus.NOT_FOUND)
-                .body(errorRes);
     }
 
     // Manejo de errores para caracteres
@@ -143,4 +122,18 @@ public class GlobalExceptionHandler {
                 .status(HttpStatus.BAD_REQUEST)
                 .body(errorRes);
     }
+
+    // Excepcion personalizada
+    @ExceptionHandler(ExcPersonalizada.class)
+    public ResponseEntity<ErrorRespuesta> handleEntityNotFoundException(ExcPersonalizada ex) {
+        // Crear un objeto de respuesta con el mensaje de la excepción
+        ErrorRespuesta errorRes = new ErrorRespuesta(ex.getMessage());
+        // Devolver la respuesta con el código de estado 404 (Not Found)
+        return ResponseEntity
+                .status(ex.getCode())
+                .body(errorRes);
+    }
 }
+
+
+

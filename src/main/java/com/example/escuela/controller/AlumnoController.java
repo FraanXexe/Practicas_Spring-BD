@@ -35,27 +35,7 @@ public class AlumnoController {
     public List<AlumnoResponse> listarAlumnos() {
         return alumnoService.obtenerAllAlumnos(); // Llama al servicio para obtener los alumnos
     }
-/*
-version 1 que ya existia
-    // Endpoint para obtener las Alumnos por su ID
-    @GetMapping("/{id}")
-    public ResponseEntity<List<AlumnoEntity>> obtenerAlumnoById(@PathVariable("id") Long alumnoId) throws InterruptedException {
-        List<AlumnoEntity> alumnoEntities = alumnoService.obtenerAlumnoById(alumnoId);
-        if (alumnoEntities.isEmpty()) {
-            return ResponseEntity.noContent().build(); // Retorna 204 si no tiene materias
-        }
-        System.out.println("Alumno: " + alumnoEntities.toString());
-        return ResponseEntity.ok(alumnoEntities); // Retorna 200 OK con las materias
-    }
 
-    Version 2 que ya no tie el if ni usa eltidades sino response
-    @GetMapping("/{id}")
-    public ResponseEntity<List<AlumnoResponse>> obtenerAlumnoById(@PathVariable("id") Long alumnoId) {
-        List<AlumnoResponse> alumnoResponses = alumnoService.obtenerAlumnoById(alumnoId);
-        return ResponseEntity.ok(alumnoResponses); // Retorna 200 OK con los alumnos
-    }
-
- */
     @GetMapping("/{id}")
     public ResponseEntity<AlumnoResponse> obtenerAlumnoById(@PathVariable("id") Long alumnoId) {
         AlumnoResponse alumnoResponse = alumnoService.obtenerAlumnoById(alumnoId);
@@ -78,3 +58,25 @@ version 1 que ya existia
         return ResponseEntity.ok(alumnos); // Si la página es válida, devuelve los alumnos
     }
 }
+
+/*
+version 1 que ya existia
+    // Endpoint para obtener las Alumnos por su ID
+    @GetMapping("/{id}")
+    public ResponseEntity<List<AlumnoEntity>> obtenerAlumnoById(@PathVariable("id") Long alumnoId) throws InterruptedException {
+        List<AlumnoEntity> alumnoEntities = alumnoService.obtenerAlumnoById(alumnoId);
+        if (alumnoEntities.isEmpty()) {
+            return ResponseEntity.noContent().build(); // Retorna 204 si no tiene materias
+        }
+        System.out.println("Alumno: " + alumnoEntities.toString());
+        return ResponseEntity.ok(alumnoEntities); // Retorna 200 OK con las materias
+    }
+
+    Version 2 que ya no tie el if ni usa eltidades sino response
+    @GetMapping("/{id}")
+    public ResponseEntity<List<AlumnoResponse>> obtenerAlumnoById(@PathVariable("id") Long alumnoId) {
+        List<AlumnoResponse> alumnoResponses = alumnoService.obtenerAlumnoById(alumnoId);
+        return ResponseEntity.ok(alumnoResponses); // Retorna 200 OK con los alumnos
+    }
+
+ */

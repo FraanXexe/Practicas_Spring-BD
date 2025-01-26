@@ -7,7 +7,10 @@ import com.example.escuela.model.response.MaestroResponse;
 import org.mapstruct.Builder;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mappings;
+import org.mapstruct.Named;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 @Mapper(componentModel = "spring", builder = @Builder(disableBuilder = true))

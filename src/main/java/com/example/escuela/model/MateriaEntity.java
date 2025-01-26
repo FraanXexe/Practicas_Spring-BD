@@ -11,7 +11,7 @@ public class MateriaEntity {
 
     @Id // Define la clave primaria
     @GeneratedValue(strategy = GenerationType.IDENTITY) // Genera valores automáticamente
-    private Long idMateria;
+    private Long id_materia;
 
     @Column(nullable = false, length = 100) // Define una columna obligatoria con longitud máxima de 100
     private String nombre;

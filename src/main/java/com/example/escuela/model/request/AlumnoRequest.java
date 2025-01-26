@@ -26,10 +26,8 @@ public class AlumnoRequest {
     private String apellidoMaterno;
 
     @NotNull(message = "No puede ir vacio")
-    @Past(message = "No puede ser mayor al dia de hoy")
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
-    //@Pattern(regexp = "^\\d{4}-\\d{2}-\\d{2}$", message = "Debe escribirse de la siguiente forma yyyy-MM-dd")
-    private Date fechaNacimiento;
+    @Pattern(regexp = "^\\d{4}-\\d{2}-\\d{2}$", message = "Debe escribirse de la siguiente forma yyyy-MM-dd")
+    private String fechaNacimiento;
 
     @NotNull(message = "No puede ir vacio")
     @Pattern(regexp = "^[MF]$", message = "Debe ser 'M' o 'F'")

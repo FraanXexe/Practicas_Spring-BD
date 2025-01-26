@@ -21,7 +21,7 @@ public class MaestroResponse {
 
     private String especialidad;
 
-    private Date fechaContratacion;
+    private String fechaContratacion;
 
     private String correoElectronico;
 }

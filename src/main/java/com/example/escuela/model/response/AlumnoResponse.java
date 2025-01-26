@@ -19,7 +19,7 @@ public class AlumnoResponse {
 
     private String apellidoMaterno;
 
-    private Date fechaNacimiento;
+    private String fechaNacimiento;
 
     private String genero;
 

@@ -1,8 +1,27 @@
 package com.example.escuela.exceptions;
 
-public class ExcPersonalizada extends RuntimeException{ // pertenece a la jerarquía de excepciones
-    // contructor que recibira el parametro
-    public ExcPersonalizada(String message) {
-        super(message); // llama al constructor de la clase padre (RuntimeException)
+import com.example.escuela.constants.MensajesError;
+import org.springframework.http.HttpStatus;
+
+public class ExcPersonalizada extends RuntimeException{
+    private HttpStatus code;
+
+    public HttpStatus getCode() {
+        return code;
+    }
+
+    public ExcPersonalizada() {
+        super();
+    }
+
+    public ExcPersonalizada(String message) {     // Construcctor con argumentos
+        super(message); // Llama al constructor de la clase padre (RuntimeException)
+    }
+
+    public ExcPersonalizada(String message, HttpStatus code) { // Construcctor con varios argumentos
+        super(message); // Llama al constructor de la clase padre (RuntimeException)
+        this.code=code;
     }
 }
+
+
