@@ -1,10 +1,7 @@
 package com.example.escuela.controller;
 
-
-import com.example.escuela.model.MaestroEntity;
 import com.example.escuela.model.MateriaEntity;
 import com.example.escuela.model.request.MateriaRequest;
-import com.example.escuela.model.response.MaestroResponse;
 import com.example.escuela.model.response.MateriaResponse;
 import com.example.escuela.service.MateriaService;
 import jakarta.validation.Valid;

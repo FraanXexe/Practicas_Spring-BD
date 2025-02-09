@@ -3,9 +3,7 @@ package com.example.escuela.model.request;
 import jakarta.validation.constraints.*;
 
 import lombok.Data;
-import org.springframework.format.annotation.DateTimeFormat;
 
-import java.util.Date;
 
 @Data
 public class AlumnoRequest {
