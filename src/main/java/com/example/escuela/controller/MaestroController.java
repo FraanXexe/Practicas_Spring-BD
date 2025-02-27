@@ -36,13 +36,6 @@ public class MaestroController {
         return maestroService.obtenerTodosLosMaestros(); // Llama al servicio para obtener los maestros
     }
 
-    // Endpoint para consumir en Servicio externo
-    @GetMapping("/materiasBymaestro/{id}")
-    public ResponseEntity<?> getMateriasPorMaestroId(@PathVariable Long id) {
-        List<MateriaEntity> materiaEntities = maestroService.obtenerMateriasPorMaestroId(id);
-            return ResponseEntity.ok(materiaEntities);
-    }
-
     // Endpoint para ver maestros por su ID
     @GetMapping("/{id}")
     public ResponseEntity<MaestroResponse> obtenerMaestroById(@PathVariable("id") Long maestroId) {
@@ -63,6 +56,17 @@ public class MaestroController {
             return ResponseEntity.status(404).body(response); // Respuesta 404 con el mensaje
         }
         return ResponseEntity.ok(maestros); // Si la página es válida, devuelve los alumnos
+    }
+
+//***************************************************************************************
+    /*************************CONSUMO DE SERVICIO EXTERNO*******************************/
+//***************************************************************************************
+
+    // Endpoint para consumir en Servicio externo
+    @GetMapping("/materiasBymaestro/{id}")
+    public ResponseEntity<?> getMateriasPorMaestroId(@PathVariable Long id) {
+        List<MateriaEntity> materiaEntities = maestroService.obtenerMateriasPorMaestroId(id);
+        return ResponseEntity.ok(materiaEntities);
     }
 }
 

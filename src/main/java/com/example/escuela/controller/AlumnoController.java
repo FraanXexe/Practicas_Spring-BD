@@ -5,21 +5,26 @@ import com.example.escuela.model.request.AlumnoRequest;
 import com.example.escuela.model.response.AlumnoResponse;
 import com.example.escuela.service.AlumnoService;
 import jakarta.validation.Valid;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import org.springframework.data.domain.Page;
 
-
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
 
 @RestController // Define que esta clase maneja solicitudes REST
 @RequestMapping("/api/alumnos") // Define la ruta de busqueda
 @CrossOrigin(origins = "*")
 public class AlumnoController {
+
+    private static final Logger logger = LoggerFactory.getLogger(AlumnoController.class);
+
 
     @Autowired // Inyección del servicio
     private AlumnoService alumnoService;
@@ -27,6 +32,8 @@ public class AlumnoController {
     // Endpoint para insertar un nuevo alumno
     @PostMapping // Maneja solicitudes POST
     public AlumnoResponse agregarAlumno(@RequestBody @Valid AlumnoRequest alumno) {
+
+        logger.info("Proyecto ESCUELA - Recibiendo petición para crear alumno: {}", alumno.getNombre());
         return alumnoService.guardarAlumno(alumno); // Llama al servicio para guardar el alumno
     }
 

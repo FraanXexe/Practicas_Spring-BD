@@ -87,7 +87,9 @@ public class MaestroService {
         return maestroRepository.findAll(pageable);
     }
 
-    // Metodo para obtener materias por maestro
+//***************************************************************************************
+    /*************************CONSUMO DE SERVICIO EXTERNO*******************************/
+//***************************************************************************************
     public List<MateriaEntity> obtenerMateriasPorMaestroId(Long id) {
         try {
             System.out.println("iniciandoCusumoDelServicioExterno");

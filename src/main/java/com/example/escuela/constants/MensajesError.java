@@ -18,12 +18,9 @@ public class MensajesError {
     public static final String TOKEN_UNSUPPORTED = "Token no soportado";
     public static final String TOKEN_ILLEGAL = "Token ilegal o vacío";
 
-    public static final String TOKEN_ILLEGALOne = "Token ilegal o vacío";
 
     public static final String USER_INVALID = "Error usuario o contraseña incorrectas.";
     public static final String TOKEN_REVOCADO = "El token ha expirado o ha sido revocado";
 
-    public static final String USER_AND_PASS_NULL1 = "Error el campo usuario 1";
-    public static final String USER_AND_PASS_NULL2 = "La propiedad (usermane) esta mal escrita";
-    public static final String USER_AND_PASS_NULL3 = "La propiedad (password) esta mal escrita";
+
 }

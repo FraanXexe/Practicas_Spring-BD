@@ -80,7 +80,7 @@ public class AlumnoService {
                 .map(alumnoMapper::toAlumnoResponse)
                 .orElseThrow(() -> new ExcPersonalizada(
                         MensajesError.ID_NOT_REGISTERED_MESSAGE_ALUMNO,
-                        HttpStatus.OK));
+                        HttpStatus.NOT_FOUND));
     }
 
     // Obtener alumnos por pagina
